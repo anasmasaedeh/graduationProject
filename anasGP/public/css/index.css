@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+span {
+    width: auto;
+    height: auto;
+}
+
+.my-logo img{
+    height: 50px;
+    width: 100px;
+}
+
+.my-navbar {
+    background-color: #79DAE8;
+}
+
+.home {
+    margin: 20px;
+    display: flex;
+}
+
+.home-paragrah {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto  10%;
+    flex-direction: column;
+}
+
+.home img {
+    width: 25%;
+    height: 300px;
+}
+
+.btn a {
+    text-decoration: none;
+    color: rgba(0,0,0,.55);
+}
+
+.btn a:hover {
+    color: rgba(0,0,0,.55);
+}
+
+.home-media {
+    display: flex;
+    margin-top: 100px;
+    justify-content: space-around;
+}
+
+.home-media img {
+    height: 200px;
+    width: 300px;
+}
+
+.voucheer-form {
+    width: 50%;
+    margin: 20px auto;
+}
+
+.break-line {
+    border-style: groove;
+    height: 8px;
+    border-color: #79DAE8;
+}
+
+.btn-info {
+    color: #fff !important;
+}
+
+.btn-info:hover{
+    color: #fff !important;
+}
+
+@media screen and (max-width: 480px) {
+    .home {
+        flex-direction: column;
+    }
+
+    .home img {
+        width: 100%;
+    }
+
+    .home-paragrah {
+        margin: 10% auto;
+    }
+
+    .home-media {
+        flex-wrap: wrap;
+        margin-top: 50px;
+    }
+
+    .home-media img {
+        margin-bottom: 20px;
+    }
+}
