@@ -19,16 +19,24 @@ const findUserByEmail = async (username) => {
 };
 
 const findUserMinistryNumberNumber = async (ministryNumber) => {
-  const collection = await getCollection("users");
-  return await collection.findOne({ ministryNumber: ministryNumber });
+  const ministry = await getCollection("ministry");
+  const data = await ministry.findOne({ number: ministryNumber });
+  if (data) {
+    const collection = await getCollection("users");
+    return await collection.findOne({ ministryNumber: ministryNumber });
+  }
+  else return !data;
 };
 
 const createUser = async (username, ministryNumber, password) => {
+  const check1 = await findUserByEmail(username);
+  const check2 = await findUserMinistryNumberNumber(ministryNumber);
+
   if (
-    (await findUserByEmail(username)) ||
-    (await findUserMinistryNumberNumber(ministryNumber))
+    check1 ||
+    check2
   ) {
-    return { Error: "User is already exist" };
+    return { Error: "User is already exist or ministry number is not exist" };
   } else {
     const collection = await getCollection("users");
     const ack = await collection.insertOne({
@@ -76,7 +84,7 @@ const getUser = async (username) => {
 
 const getPoints = async (username) => {
   const collection = await getCollection("users");
-  const user  = await collection.findOne({username: username})
+  const user = await collection.findOne({ username: username })
   return (user || {}).points;
 }
 
@@ -96,7 +104,7 @@ const checkForPoints = async () => {
       },
       {
         $set: {
-          points: el.residence === 'Jordan' ?  el.points + 5 : el.points + 3,
+          points: el.residence === 'Jordan' ? el.points + 5 : el.points + 3,
         },
       }
     );

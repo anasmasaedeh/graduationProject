@@ -8,7 +8,8 @@ const logInRequests = (req, res) => {
   if (req.session.isUserLoggedIn) {
     res.redirect("/user");
   }
-  res.render("log-in", { status: true, register: true });
+  else
+    res.render("log-in", { status: true, register: true });
 };
 
 const logInHandler = async (req, res) => {
@@ -67,7 +68,9 @@ const verifyUser = async (req, res) => {
 const whatIsState = async (req, res) => {
   if (req.session.isUserLoggedIn) {
     const points = await dbQueries.getPoints(req.session.userId);
-    res.render("whatsIsMyStatus", { point: `${points}` });
+    const user = await dbQueries.getUser(req.session.userId);
+
+    res.render("whatsIsMyStatus", { point: `${points}`, userData: user });
   } else {
     res.redirect("log-in");
   }
@@ -75,7 +78,7 @@ const whatIsState = async (req, res) => {
 
 setInterval(() => {
   dbQueries.checkForPoints();
-}, 84600);
+}, 86400000);
 
 module.exports = {
   homeRequest,
