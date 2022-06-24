@@ -55,7 +55,7 @@
       var xValues = ["My points", "The points that needed"];
       var point = parseInt(document.querySelector('.point').getAttribute('value'));
       var yValues = [point, 45];
-      var barColors = ["#b91d47", "#00aba9"];
+      var barColors = ["#b91d47", "#79DAE8"];
 
       new Chart("myChart", {
         type: "pie",
@@ -75,6 +75,33 @@
           },
         },
       });
+    </script>
+
+    <div  class="data-user">
+      <div>
+        Username: <%= userData.username %>
+        <br>
+        Ministry number: <%= userData.ministryNumber %>
+        <br>
+        Cumulative points: <%= point %>
+      </div>
+      <div class="expecteddata"></div>
+    </div>
+    <div class="docs" style="display: none;">
+    <hr>
+
+      Congrats!! <br>
+      Please fill the document requested to get the loan !!
+      <br> Get your document to the office of laons
+    </div>
+
+    <script>
+      let pointUSer = parseInt(document.querySelector('.point').getAttribute('value'));
+      let expectedYear = Math.ceil(new  Date().getFullYear() + 45/5 - pointUSer/5);
+      document.querySelector('.expecteddata').innerHTML = "Expected year for get loan: " + expectedYear;
+      if (45/5 - pointUSer/5 === 0) {
+        document.querySelector('.docs').style.display = "block"
+      }
     </script>
   </body>
 </html>
